@@ -1,7 +1,3 @@
-const express = require("express");
-const app = express();
-
-app.use(express.json());
 let persons = [
   {
     id: 1,
@@ -24,6 +20,13 @@ let persons = [
     number: "39-23-6423122",
   },
 ];
+
+const express = require("express");
+const app = express();
+var morgan = require("morgan");
+
+app.use(express.json());
+app.use(morgan('tiny'))
 
 const generateId = () => {
   return Math.floor(Math.random() * 1000000000);
