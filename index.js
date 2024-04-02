@@ -26,8 +26,22 @@ const app = express();
 var morgan = require("morgan");
 
 app.use(express.json());
-app.use(morgan('tiny'))
 
+// Define a custom token for logging request bodies
+morgan.token("req-body", (req) => {
+  // This will convert the request body to a JSON string for logging
+  // You might want to do this conditionally based on the route or request type
+  return JSON.stringify(req.body);
+});
+
+// Use Morgan with the 'tiny' format and also log the custom 'req-body' token
+// The format string components for 'tiny' are ':method :url :status :res[content-length] - :response-time ms'
+// We're adding ' :req-body' at the end to log the request body as well
+app.use(
+  morgan(
+    ":method :url :status :res[content-length] - :response-time ms :req-body"
+  )
+);
 const generateId = () => {
   return Math.floor(Math.random() * 1000000000);
 };
