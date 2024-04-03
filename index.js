@@ -24,8 +24,11 @@ let persons = [
 const express = require("express");
 const app = express();
 var morgan = require("morgan");
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
+app.use(express.static("dist"));
 
 // Define a custom token for logging request bodies
 morgan.token("req-body", (req) => {
@@ -45,10 +48,6 @@ app.use(
 const generateId = () => {
   return Math.floor(Math.random() * 1000000000);
 };
-
-app.get("/", (request, response) => {
-  response.send("<h1>Hello World!</h1>");
-});
 
 app.get("/info", (request, response) => {
   const htmlResponse = `<div>Phonebook has info for ${

@@ -6,11 +6,16 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ui": "rm -rf dist && cd ../Fullstack-Open/Phonebook && npm run build && cp -r dist ../../Fullstack-Open-Backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs"
   },
   "author": "Balazs Gonter",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "morgan": "^1.10.0"
   },
