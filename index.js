@@ -22,13 +22,14 @@ let persons = [
 ];
 
 const express = require("express");
+const path = require("path");
 const app = express();
 var morgan = require("morgan");
 const cors = require("cors");
 
+app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.json());
 app.use(cors());
-app.use(express.static("dist"));
 
 // Define a custom token for logging request bodies
 morgan.token("req-body", (req) => {
@@ -107,7 +108,7 @@ app.post("/api/persons", (request, response) => {
   response.json(person);
 });
 
-const PORT = 3002;
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
